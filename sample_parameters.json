@@ -1,0 +1,13 @@
+{
+	"parameters":{
+		"tenantname": "mytenant.com",
+		"resource": "https://graph.microsoft.com",
+		"endpoint": "https://graph.microsoft.com/beta/auditLogs/signIns",
+		"clientid_param":"myclient_id",
+		"clientsecret_param":"myclient_secret",
+		"aws_region":"us-east-1",
+		"filename":"sign_in_logs.json",
+		"bucket":"mybucket",
+		"prefix":"myprefix"
+	}
+}
