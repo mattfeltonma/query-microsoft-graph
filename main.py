@@ -4,7 +4,6 @@
 import json
 import requests
 import logging
-import boto3
 from awsintegration import get_parametersParameterStore,put_s3
 from adal import AuthenticationContext
 from argparse import ArgumentParser
@@ -31,11 +30,13 @@ try:
         resource = d['parameters']['resource']
         endpoint = d['parameters']['endpoint']
         filename = d['parameters']['filename']
-        bucket = d['parameters']['bucket']
-        prefix = d['parameters']['prefix']
         aws_region = d['parameters']['aws_region']
         clientid_param = d['parameters']['clientid_param']
         clientsecret_param = d['parameters']['clientsecret_param']
+        if args.bucket:
+            bucket = d['parameters']['bucket']
+            prefix = d['parameters']['prefix']
+            
 except Exception as e:
     print('Error reading parameter file: ',e)
 
