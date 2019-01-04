@@ -4,8 +4,8 @@
 import json
 import requests
 import logging
-from awsintegration import get_parametersParameterStore,put_s3
-from adal import AuthenticationContext
+import graphapi
+import awsintegration
 from argparse import ArgumentParser
 
 ## Setup Python logging module to create a logging instance for this module and
@@ -43,56 +43,19 @@ except Exception as e:
 ## Retrieve Azure AD application credentials from Parameter Store
 ##
 
-clientid = get_parametersParameterStore(clientid_param,aws_region)
-clientsecret = get_parametersParameterStore(clientsecret_param,aws_region)
+clientid = awsintegration.get_parametersParameterStore(clientid_param,aws_region)
+clientsecret = awsintegration.get_parametersParameterStore(clientsecret_param,aws_region)
 
-## Use Python Requests module to make requests of Microsoft Graph API
-## and additionally handle paged responses
+## Obtain access token from Azure AD
+##
 
-def makeAPIRequest(endpoint,headers):
-    try:
-        response = requests.get(endpoint,headers=headers)
-        if response.status_code == 200:
-            logging.info('HTTP GET: ' + endpoint)
-            json_data = json.loads(response.text)
-            
-            ## This section handles paged results and combines the results 
-            ## into a single JSON response.  This may need to be modified
-            ## if results are too large
+token = graphapi.obtain_accesstoken(tenantname,clientid,clientsecret,resource)
 
-            if '@odata.nextLink' in json_data.keys():
-                record = makeAPIRequest(json_data['@odata.nextLink'],headers)
-                entries = len(record['value'])
-                count = 0
-                while count < entries:
-                    json_data['value'].append(record['value'][count])
-                    count += 1
-            return(json_data)
-        else:
-            logging.error('Request failed: ', response.status_code, ' - ', response.text)
-    except Exception as e:
-        logging.error('Error querying Microsoft Graph API: ', e)
+## Query MS Graph API Endpoint
+##
 
+data = graphapi.makeapirequest(endpoint,token)
 
-## Use Python Microsoft ADAL module to obtain an access token for Azure AD
-## API and create header for requests
-
-try:
-    auth_context = AuthenticationContext('https://login.microsoftonline.com/' +
-        tenantname)
-    token = auth_context.acquire_token_with_client_credentials(
-        resource=resource,client_id=clientid,
-        client_secret=clientsecret)
-except Exception as e:
-    logging.error('Error obtaining access token: ', e)
-
-headers = {'Content-Type':'application/json', \
-    'Authorization':'Bearer {0}'.format(token['accessToken'])}
-
-## Use Python Requests module to make requests from Azure API checking for OData
-## paging
-
-data = makeAPIRequest(endpoint,headers=headers)
 try:
     with open(filename,'w') as f:
         
@@ -107,6 +70,6 @@ except Exception as e:
 
 
 if args.bucket:
-    put_s3(bucket,prefix,region)
+    awsintegration.put_s3(bucket,prefix,aws_region,filename)
 
 
