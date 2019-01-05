@@ -3,7 +3,10 @@
 
 import json
 import requests
+import logging
 from adal import AuthenticationContext
+
+log = logging.getLogger(__name__)
 
 ## Use Microsoft ADAL module to obtain a bearer token for access to Azure AD and
 ## create a header to pass in a request
@@ -28,6 +31,8 @@ def makeapirequest(endpoint,token):
         
     ## Submit a request to the API and handle OData paged results
     ##
+    
+    log.info('Making request to %s...',endpoint)
         
     response = requests.get(endpoint,headers=headers)
     if response.status_code == 200:
@@ -38,6 +43,7 @@ def makeapirequest(endpoint,token):
         ## if results are too large
 
         if '@odata.nextLink' in json_data.keys():
+            log.info('Pages result returned...')
             record = makeapirequest(json_data['@odata.nextLink'],token)
             entries = len(record['value'])
             count = 0
