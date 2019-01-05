@@ -12,7 +12,7 @@ from argparse import ArgumentParser
 ## Setup Python logging module to create a logging instance for this module and
 ## to write log entries to a file with INFO log level
     
-logging.basicConfig(filename='graphapi.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='msapiquery.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 ## Process parameters file and retrieve data

@@ -43,7 +43,7 @@ def makeapirequest(endpoint,token):
         ## if results are too large
 
         if '@odata.nextLink' in json_data.keys():
-            log.info('Pages result returned...')
+            log.info('Paged result returned...')
             record = makeapirequest(json_data['@odata.nextLink'],token)
             entries = len(record['value'])
             count = 0
