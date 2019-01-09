@@ -30,12 +30,7 @@ def makeapirequest(endpoint,token,q_param=None):
         
     headers = {'Content-Type':'application/json', \
     'Authorization':'Bearer {0}'.format(token['accessToken'])}
-        
-    ## Submit a request to the API and handle OData paged results
-    ##
-    
-
-    
+           
     ## This section handles a bug with the Python requests module which
     ## encodes blank spaces to plus signs instead of %20.  This will cause
     ## issues with OData filters
