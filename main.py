@@ -51,7 +51,7 @@ try:
 
 ## Query MS Graph API Endpoint
 ##
-    logging.info('Attempting to query %s ...',endpoint)
+
     data = graphapi.makeapirequest(endpoint,token,q_param)
 
 ## Write results to a file

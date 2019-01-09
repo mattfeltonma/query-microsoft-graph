@@ -34,18 +34,18 @@ def makeapirequest(endpoint,token,q_param=None):
     ## Submit a request to the API and handle OData paged results
     ##
     
-    log.info('Making request to %s...',endpoint)
+
     
     ## This section handles a bug with the Python requests module which
     ## encodes blank spaces to plus signs instead of %20.  This will cause
     ## issues with OData filters
     
     if q_param != None:
-        params = urllib.parse.urlencode(q_param, quote_via=urllib.parse.quote)
-        response = requests.get(endpoint,headers=headers,params=params)
-        print(response.url)
+        response = requests.get(endpoint,headers=headers,params=q_param)
+        log.info('Request made to %s...',response.url)
     else:
         response = requests.get(endpoint,headers=headers)
+        log.info('Request made to %s...',response.url)
     if response.status_code == 200:
         json_data = json.loads(response.text)
             
