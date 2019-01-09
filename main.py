@@ -31,6 +31,7 @@ try:
         endpoint = d['parameters']['endpoint']
         filename = d['parameters']['filename']
         aws_region = d['parameters']['aws_region']
+        q_param = d['parameters']['q_param']
         clientid_param = d['parameters']['clientid_param']
         clientsecret_param = d['parameters']['clientsecret_param']
         if args.s3:
@@ -51,7 +52,7 @@ try:
 ## Query MS Graph API Endpoint
 ##
     logging.info('Attempting to query %s ...',endpoint)
-    data = graphapi.makeapirequest(endpoint,token)
+    data = graphapi.makeapirequest(endpoint,token,q_param)
 
 ## Write results to a file
 ##

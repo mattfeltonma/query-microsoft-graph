@@ -4,6 +4,8 @@
 import json
 import requests
 import logging
+import urllib
+
 from adal import AuthenticationContext
 
 log = logging.getLogger(__name__)
@@ -22,7 +24,7 @@ def obtain_accesstoken(tenantname,clientid,clientsecret,resource):
 ## Create a valid header using a provided access token and make a request
 ## of the MS Graph API
 
-def makeapirequest(endpoint,token):
+def makeapirequest(endpoint,token,q_param=None):
     ## Create a valid header using the provided access token
     ##
         
@@ -33,8 +35,12 @@ def makeapirequest(endpoint,token):
     ##
     
     log.info('Making request to %s...',endpoint)
-        
-    response = requests.get(endpoint,headers=headers)
+    if q_param != None:
+        params = urllib.parse.urlencode(q_param, quote_via=urllib.parse.quote)
+        response = requests.get(endpoint,headers=headers,params=params)
+        print(response.url)
+    else:
+        response = requests.get(endpoint,headers=headers)
     if response.status_code == 200:
         json_data = json.loads(response.text)
             
