@@ -70,8 +70,9 @@ try:
 
 ## Send the file to S3 if the user has set the bucket switch 
 ##
-    logging.info('Attempting to write results to %s S3 bucket...',bucket)
+    
     if args.s3:
+        logging.info('Attempting to write results to %s S3 bucket...',bucket)
         awsintegration.put_s3(bucket,prefix,aws_region,filename)
 except Exception as e:
     logging.error('Exception thrown: %s',e)
