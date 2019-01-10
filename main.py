@@ -7,7 +7,13 @@ import logging
 import time
 import graphapi
 import awsintegration
+
+## SIGN IN LOGS ONLY
+## import re
+
 from argparse import ArgumentParser
+
+
 
 ## Setup Python logging module to create a logging instance for this module and
 ## to write log entries to a file with INFO log level
@@ -53,6 +59,10 @@ try:
 ##
 
     data = graphapi.makeapirequest(endpoint,token,q_param)
+
+## SIGN IN LOGS ONLY
+##  for record in data['value']:
+##      record['createdDateTime'] = re.sub('[TZ]',' ', record['createdDateTime'])
 
 ## Write results to a file
 ##
