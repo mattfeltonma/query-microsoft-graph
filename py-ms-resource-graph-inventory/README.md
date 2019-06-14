@@ -6,10 +6,10 @@ Retrieving information about Azure resources typically involves creating separat
 
 ## Requirements
 
-*[Python 3.7](https://www.python.org/downloads/release/python-370/)
-*[Microsoft Azure Python SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk)
-*[Microsoft Azure Active Directory Authentication Library (ADAL)](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries)
-*[Pandas]https://pandas.pydata.org/
+* [Python 3.7](https://www.python.org/downloads/release/python-370/)
+* [Microsoft Azure Python SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk)
+* [Microsoft Azure Active Directory Authentication Library ADAL](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries)
+* [Pandas]https://pandas.pydata.org/
 
 ### Setup
 Clone the repository.
