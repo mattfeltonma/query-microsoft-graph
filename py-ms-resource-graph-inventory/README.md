@@ -11,7 +11,7 @@ Retrieving information about Azure resources typically involves creating separat
 * [Microsoft Azure Active Directory Authentication Library ADAL](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries)
 * [Pandas](https://pandas.pydata.org/)
 
-### Setup
+## Setup
 Clone the repository.
 
 Prior to running the script you will need to create the Azure Active Directory security principal that the script will use.  The script uses the [OAuth Device Grant flow](https://oauth.net/2/device-flow/) to acquire a OAuth token to access the Resource Graph with the delegated rights of the user running the script.  The security principal needs to be granted the permission to access the Azure Service Management API as the user.  The user executing the script and authorizing the script needs to have the appropriate permissions to the Azure subscription.  See the following [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) for instructions.
@@ -22,7 +22,7 @@ The results of the query are stored in JSON format in a file with a filename spe
 
 The Resource Graph is configured to page results if more than 100 records are returned.  The script is configured to handle these paged records and will write the records to the file after all of the returned records have been retrieved.
 
-### Execution
+## Execution
 The script requires a parameters file and a filename for the export file be provided as arguments at runtime.  A sample parameters file is included in the repository.
 
 Example: python3 azure-inventory.py -parameterfile parameters.json -exportfile resources.json
