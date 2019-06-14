@@ -2,7 +2,7 @@
 This Python script is used to interact with the [Microsoft Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/) service to query [Azure Resource Manager](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview) for information on Azure resources.  It is written using Python 3.7.
 
 ## What problem does this solve?
-Retrieving information about Azure resources typically involves creating separate resource queries to each [resource provider](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services) such as storage, network, and compute.  By using the Microsoft Azure Resource Graph, complex queries using a language similar to the [Kusto query lanugage](https://docs.microsoft.com/en-us/azure/data-explorer/data-explorer-overview).
+Retrieving information about Azure resources typically involves creating separate resource queries to each [resource provider](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services) such as storage, network, and compute.  By using the Microsoft Azure Resource Graph queries for properties of resources can be performed without having to make them individually to each resource provider.
 
 ## Requirements
 
@@ -18,7 +18,7 @@ Prior to running the script you will need to create the Azure Active Directory s
 
 The script keeps a log file of its activities in a file named resource_inventory.log which is stored in the directory the script is executed from.  The log file can be used to track the scripts activities and for debugging any errors.
 
-The results of the query are stored in JSON format in a file with a filename specified by the user at runtime.  This can be imported into a business intelligence tool such as PowerBI for further analysis.
+The results of the query are stored in JSON format in a file with a filename specified by the user at runtime.  This can be imported into a business intelligence tool such as PowerBI for further analysis.  The query must use the Resource Graph query language (https://docs.microsoft.com/en-us/azure/governance/resource-graph/concepts/query-language).
 
 The Resource Graph is configured to page results if more than 100 records are returned.  The script is configured to handle these paged records and will write the records to the file after all of the returned records have been retrieved.
 
