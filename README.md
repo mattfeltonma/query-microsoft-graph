@@ -1,4 +1,4 @@
-# Microsoft Azure Resource Graph Query
+# Microsoft Graph Query
 This Python script is used to interact with the [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview) service and provides integration with Amazon Web Services services for credential and data storage. 
 
 ## What problem does this solve?
