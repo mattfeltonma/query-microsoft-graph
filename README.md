@@ -9,6 +9,7 @@ The script demonstrates how services from multiple public clouds can be strung t
 * [Python 3.6](https://www.python.org/downloads/release/python-360/)
 * [AWS Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html?id=docs_gateway)
 * [Microsoft Azure Active Directory Authentication Library ADAL](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries)
+* Azure AD Premium P1 or above SKU to pull from the Azure AD Reporting API
 
 ## Setup
 Clone the repository.
